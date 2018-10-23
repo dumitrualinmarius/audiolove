@@ -594,13 +594,7 @@
 		</audio>
 
 		<div class="heart">❤</div>
-		<div class="heart1"></div>
-		<div class="sprite-holder" id="butterfly-sprite"></div>
-        <div class="fave"></div>
-		<canvas id="canvas" class="canvas-container"></canvas>
-		
 		<script>
-		$(document).ready(function() {
 			var animated = false;
 			$('.heart').click(function () {
 				if (!animated) {
@@ -615,7 +609,11 @@
 			setInterval(function () {
 				$(".heart").click();
 			}, 2000);
+		</script>
 
+		<div class="heart1"></div>
+
+		<script>
 			var animated = false;
             $('.heart1').click(function () {
 				if (!animated) {
@@ -632,6 +630,12 @@
 				$(".heart1").click();
 			}, 1000);
 
+		</script>    
+
+		<div class="sprite-holder" id="butterfly-sprite"></div>
+
+        <div class="fave"></div>
+        <script>
             var animate = false;
             $('.fave').click(function () {
                 if (!animate) {
@@ -647,7 +651,10 @@
             setInterval(function () {
                 $(".fave").click();
             }, 2000);
+        </script>
 
+		<canvas id="canvas" class="canvas-container"></canvas>
+		<script>
 			var imgHolder = $("#butterfly-sprite"),
 				cols = 10,
 				rows = 2,
@@ -678,7 +685,8 @@
 				tl.play();
 				tl2.play();
 			});
-
+		</script>
+		<script>
 			var canvas = document.getElementById('canvas'),
 				ctx = canvas.getContext('2d'),
 				ww = canvas.width = window.innerWidth,
@@ -772,7 +780,6 @@
 			}
 
 			render();
-		});	
 		</script>
 
 </body>
