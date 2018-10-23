@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,268 +8,574 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 	<style>
-		/* just some  styling*/
-	body { 
-	  text-align: center; 
+		@charset "UTF-8";
+		@import url(https://fonts.googleapis.com/css?family=Raleway);
+		body {
+		  background: #fff;
+		  font-family: 'Raleway';
+		}
+		h1 {
+		  color: #000;
+		  margin-top: 50px;
+		  text-align: center;
+		  font-weight: normal;
+		  font-size:40px;
+		}
 
-	}
-
-	/* heart div class - in html i used just a simple html simbol entity for heart sign, you can use text or whatever u want*/
-
-	.heart {
-		font-size: 150px;
-		color: #e00;
-		animation: beat 1s infinite alternate;
-		transform-origin: center;
-	}
-
-	/* Heart beat animation */
-	@keyframes beat{
-		to { transform: scale(1.4); }
-	}
-
-	/* we are using prefix free for this example
-
-	for prefixed code it would look like this
-
-
-	body {
-		text-align: center;
-	}
-
-
-	.heart {
-		font-size: 150px;
-		color: #e00;
-
-		-webkit-animation: beat .25s infinite alternate;
-		-moz-animation: beat .25s infinite alternate;
-		-ms-animation: beat .25s infinite alternate;
-		-o-animation: beat .25s infinite alternate;
-		animation: beat .25s infinite alternate;
-
-		-webkit-transform-origin: center;
-		-moz-transform-origin: center;
-		-o-transform-origin: center;
-		-ms-transform-origin: center;
-		transform-origin: center;
-	}
+		.heart {
+		  width: 20px;
+		  height: 20px;
+		  transform: translateZ(0);
+		  color: #aaa;
+		  font-size: 3em;
+		  cursor: pointer;
+		  position: relative;
+		  transition: all .3s ease;
+		  left: 10%;
+		  margin-top:-480px;
+          z-index: 1000;
+		}
 
 
-	@keyframes "beat" {
-	 to {
-		-webkit-transform: scale(1.4);
-		-moz-transform: scale(1.4);
-		-o-transform: scale(1.4);
-		-ms-transform: scale(1.4);
-		transform: scale(1.4);
-	 }
+		.heart:hover {
+		  animation: pulse .6s linear;
+		}
+		.heart:before {
+		  content: "❤";
+		  position: absolute;
+		  color: #A12B2B;
+		  opacity: 0;
+		}
+		.heart.happy {
+		  color: #A12B2B;
+		}
+		.heart.happy:before {
+		  opacity: 0;
+		  transform: translateY(-30px) rotateZ(5deg);
+		  animation: fly 1s ease;
+		}
 
-	}
+		@keyframes pulse {
+		  50% {
+			transform: scale(1.1);
+		  }
+		}
+		@keyframes fly {
+		  0% {
+			opacity: 0;
+			transform: translateY(-20px) rotateZ(15deg);
+		  }
+		  50% {
+			opacity: .75;
+			transform: scale(4) translateY(-30px) rotateZ(-15deg);
+		  }
+		  100% {
+			opacity: 0;
+			transform: scale(4) translateY(-50px) rotateZ(15deg);
+		  }
+		}
 
-	@-moz-keyframes beat {
-	 to {
-	   -moz-transform: scale(1.4);
-	   transform: scale(1.4);
-	 }
 
-	}
+        .canvas-container {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
 
-	@-webkit-keyframes "beat" {
-	 to {
-	   -webkit-transform: scale(1.4);
-	   transform: scale(1.4);
-	 }
+        .carousel {
+            z-index: 999;
+        }
 
-	}
+        .heart1 {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 93%;
+            top: 10%;
+            transform: translate(-50%, -50%);
+            background: url(heart.png) no-repeat;
+            background-position: 0 0;
+            cursor: pointer;
+            z-index: 1000;
+        }
+		.heart-line {
+		  background-position: -2800px 0;
+		  transition: background 1s steps(28);
+		}
 
-	@-ms-keyframes "beat" {
-	 to {
-	   -ms-transform: scale(1.4);
-	   transform: scale(1.4);
-	 }
+		h1
+		{
+		  text-align:center;
+		}
 
-	}
+		.sprite-holder
+		{
+		  width: 70px;
+		  height: 65px;
+		  margin:0px;
+		  position: relative;
+		  background-image:url(http://c2.glitch.bz/items/2012-12-06/npc_butterfly__x1_fly-angle2_png_1354829527.png);
+		  background-position: 0 0;
+		  background-repeat: no-repeat;
+          z-index: 1000;
+		}
 
-	@-o-keyframes "beat" {
-	 to {
-	   -o-transform: scale(1.4);
-	   transform: scale(1.4);
-	 }
+        .fave {
+            width: 70px;
+            height: 50px;
+            background: url(fave.png) no-repeat;
+            background-position: 0 0;
+            position: relative;
+            left: 80%;
+            top: 49%;
+            cursor: pointer;
+            z-index: 1000;
+            margin-top: 250px;
+        }
 
-	} */
+        .fave-line {
+            background-position: -3519px 0;
+            transition: background 1s steps(55);
+        }
+
+		html,
+		body {
+		  width: 100%;
+		  height: 100%; 
+		  margin: 0;
+		  padding: 0;
+		  overflow: hidden;
+
+		}
+
+        @media only screen and (orientation: portrait) and (min-device-width : 375px) and (max-device-width : 667px) {
+            .heart {
+                position: absolute;
+                top: 85px;
+                left: 35px;
+                margin: 0px;
+            }
+
+            .heart1 {
+                position: absolute;
+                top: 110px;
+                left: 320px;
+            }
+
+            h2 {
+                font-size: 12px;
+                margin-top: 130px;
+            }
+
+            .carousel-caption{
+                bottom: -20px !important;
+            }
+
+            .fave {
+                margin-top: -120px !important;
+            }
+        }
+
+        @media only screen and (orientation: landscape) and (min-device-width : 375px) and (max-device-width : 667px) {
+            .heart {
+                position: absolute;
+                top: 85px;
+                left: 35px;
+                margin: 0px;
+            }
+
+            .heart1 {
+                position: absolute;
+                top: 110px;
+                left: 615px;
+            }
+
+            .sprite-holder {
+                top: -250px;
+            }
+
+            .fave{
+                margin-top: -150px !important;
+            }
+        }
+
 </style>
 </head>
 
-<body>
+<body style="overflow:hidden">
 
 	<div class="container" style="padding-top: 50px">
-		<!-- <h2>Monica si Alin</h2>   -->
+
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-				<li data-target="#myCarousel" data-slide-to="3"></li>
-				<li data-target="#myCarousel" data-slide-to="4"></li>
-				<li data-target="#myCarousel" data-slide-to="5"></li>
-				<li data-target="#myCarousel" data-slide-to="6"></li>
-				<li data-target="#myCarousel" data-slide-to="7"></li>
-				<li data-target="#myCarousel" data-slide-to="8"></li>
-				<li data-target="#myCarousel" data-slide-to="9"></li>
-				<li data-target="#myCarousel" data-slide-to="10"></li>
-				<li data-target="#myCarousel" data-slide-to="11"></li>
-				<li data-target="#myCarousel" data-slide-to="12"></li>
-				<li data-target="#myCarousel" data-slide-to="13"></li>
-				<li data-target="#myCarousel" data-slide-to="14"></li>
-				<li data-target="#myCarousel" data-slide-to="15"></li>
-				<li data-target="#myCarousel" data-slide-to="16"></li>
-				<li data-target="#myCarousel" data-slide-to="17"></li>
-				<li data-target="#myCarousel" data-slide-to="18"></li>
-				<li data-target="#myCarousel" data-slide-to="19"></li>
-				<li data-target="#myCarousel" data-slide-to="20"></li>
-				<li data-target="#myCarousel" data-slide-to="21"></li>
-				<li data-target="#myCarousel" data-slide-to="22"></li>
-				<li data-target="#myCarousel" data-slide-to="23"></li>
-				<li data-target="#myCarousel" data-slide-to="24"></li>
-				<li data-target="#myCarousel" data-slide-to="25"></li>
-				<li data-target="#myCarousel" data-slide-to="26"></li>
-				<li data-target="#myCarousel" data-slide-to="27"></li>
-				<li data-target="#myCarousel" data-slide-to="28"></li>
-				<li data-target="#myCarousel" data-slide-to="29"></li>
-				<li data-target="#myCarousel" data-slide-to="30"></li>
-			</ol>
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="./images/1.jpg" alt="Inceputuri..." style="width:100%;">
+					<img src="./images/happy.jpg" style="width:100%;">
+
+				</div>
+			
+				<div class="item">
+					<img src="./images/poza1.jpg" style="width:100%;">
 					<div class="carousel-caption">
-						<h2>Aici a inceput totul...</h2>
+						<h2>Acum 5 ani, aici a inceput totul...</h2>
 					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/2.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza2.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Primul Craciun impreuna</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/3.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza3.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Noi 2</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/4.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza4.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Poarta sarutului</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/5.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza5.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Plimbare in parc</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/6.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza6.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Primul Revelion impreuna</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/7.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza7.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Pe plaja, Costinesti</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/8.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza8.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>liana...ahahahahhahahhaaa</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/9.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza9.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>purple</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/10.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza10.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>In dreapta e bolidul!</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/11.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza11.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Noi doi si eu gol :))</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/12.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza12.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>liana 2 ... ahahahhahahahhaaa</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/13.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza13.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Alin, uite cum schiez!</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/14.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza14.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>namol, piele fina</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/15.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza15.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Alin, te ajut sa aprinzi lampionul!</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/16.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza16.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>hmmmmm...</h2>
+					</div>
+				</div>
+
+				<!-- <div class="item"> -->
+					<!-- <img src="./images/poza17.jpg"  style="width:100%;"> -->
+				<!-- </div> -->
+
+				<div class="item">
+					<img src="./images/poza18.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>relax</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/17.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza19.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>two flowers</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/18.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza20.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>party</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/19.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza21.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>al doilea Revelion impreuna</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/20.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza22.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>black</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/21.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza23.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Cipilici</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/22.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza24.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>valuri</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/23.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza25.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>blue</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/24.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza26.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Vreau si eu in poza!</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/25.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza27.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>sand ... beach... relaxing time</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/26.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza28.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>window</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/27.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza29.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>liana 3 aahahahhahha...</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/28.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza30.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>you drive me crazy!</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/29.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza31.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>rocks</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/30.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza32.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>dark blue</h2>
+					</div>
 				</div>
 
 				<div class="item">
-					<img src="./images/31.jpg" alt="Primul Craciun" style="width:100%;">
+					<img src="./images/poza33.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Colgate</h2>
+					</div>
 				</div>
+
+				<div class="item">
+					<img src="./images/poza34.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>flower power</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza35.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Colgate 2</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza36.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>la muzeu</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza37.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>pe turela :></h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza38.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Mr. Snow</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza39.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>river</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza40.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>:*</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza41.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>no comment</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza42.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>together</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza43.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>The Godfather</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza44.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Farming...</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza45.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Mai incet cu condusul pana nu ne rasturnam!</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza46.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>awesome</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza47.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>fresh</h2>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="./images/poza48.jpg"  style="width:100%;">
+					<div class="carousel-caption">
+						<h2>Regarde la balle, n'est-ce pas la balle, où est la balle?</h2>
+					</div>
+				</div>
+
+                <div class="item">
+                    <img src="./images/poza49.jpg"  style="width:100%;">
+                    <div class="carousel-caption">
+                        <h2>Monilisa</h2>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="./images/poza50.jpg"  style="width:100%;">
+                    <div class="carousel-caption">
+                        <h2>The King & The Queen</h2>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="./images/poza51.jpg"  style="width:100%;">
+                    <div class="carousel-caption">
+                        <h2>To be continued...</h2>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="./images/giphy.gif"  style="width:100%;">                  
+                </div>
 
 			</div>
 
@@ -283,12 +589,199 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-		<div class="heart">&#x2665;</div>
-		<h2 style="margin: 0px !important">Urmeaza-ti inima</h2>
-	</div>
-	<audio controls id="audiolove" autoplay loop style="display:none">
-		<source src="./audiolove.mp3" type="audio/ogg">
-	</audio>
+		<audio controls id="audiolove" autoplay loop style="display:none">
+			<source src="./audiolove.mp3" type="audio/ogg">
+		</audio>
+
+		<div class="heart">❤</div>
+		<script>
+			var animated = false;
+			$('.heart').click(function () {
+				if (!animated) {
+					$(this).addClass('happy').removeClass('broken');
+					animated = true;
+				}
+				else {
+					$(this).removeClass('happy').addClass('broken');
+					animated = false;
+				}
+			});
+			setInterval(function () {
+				$(".heart").click();
+			}, 2000);
+		</script>
+
+		<div class="heart1"></div>
+
+		<script>
+			var animated = false;
+            $('.heart1').click(function () {
+				if (!animated) {
+					$(this).addClass('heart-line');
+					animated = true;
+				}
+				else {
+					$(this).removeClass('heart-line').addClass('heart1');
+					animated = false;
+				}
+			});
+
+			setInterval(function () {
+				$(".heart1").click();
+			}, 1000);
+
+		</script>    
+
+		<div class="sprite-holder" id="butterfly-sprite"></div>
+
+        <div class="fave"></div>
+        <script>
+            var animate = false;
+            $('.fave').click(function () {
+                if (!animate) {
+                    $(this).addClass('fave-line');
+                    animate = true;
+                }
+                else {
+                    $(this).removeClass('fave-line').addClass('fave');
+                    animate = false;
+                }
+            });
+
+            setInterval(function () {
+                $(".fave").click();
+            }, 2000);
+        </script>
+
+		<canvas id="canvas" class="canvas-container"></canvas>
+		<script>
+			var imgHolder = $("#butterfly-sprite"),
+				cols = 10,
+				rows = 2,
+				tl = new TimelineMax({ repeat: -1 }),
+				tl2 = new TimelineMax({ repeat: -1 }),
+				path = [{ x: 0, y: 0 }, { x: 50, y: -10 }, { x: 150, y: 100 }, { x: 200, y: 200 }, { x: 400, y: 100 }, { x: 650, y: 300 }];
+
+			for (var i = 0; i < rows; i++) {
+				for (var j = 0; j < cols; j++) {
+					var newPos = { top: -i * 65, left: -j * 70 }
+					tl.set(imgHolder, { backgroundPosition: newPos.left + "px " + newPos.top + "px" }, ((i * 10) + j) / 40);
+				}
+			}
+
+			tl2
+				.to(imgHolder, 4,
+					{
+						bezier:
+						{
+							type: "soft",
+							values: path,
+							autoRotate: true
+						},
+						ease: Power0.easeInOut
+					});
+
+			imgHolder.click(function () {
+				tl.play();
+				tl2.play();
+			});
+		</script>
+		<script>
+			var canvas = document.getElementById('canvas'),
+				ctx = canvas.getContext('2d'),
+				ww = canvas.width = window.innerWidth,
+				wh = canvas.height = window.innerHeight,
+				colors = ["#D94A64", "#06ADBF", "#A0D94A", "#F2884B", "#F2C84B"],
+				flowers = [];
+
+			ctx.lineWidth = 3;
+
+			var createFlower = function () {
+
+				flowers.push({
+					speed: Math.random(),
+					scaleSpeed: Math.random() / 2 + .05,
+					color: colors[Math.floor(Math.random() * 5)],
+					position: {
+						x: Math.round(Math.random() * ww),
+						y: Math.round(Math.random() * wh)
+					},
+					size: 0,
+					maxSize: Math.random() * 80 + 40,
+					born: false
+				});
+
+			};
+
+			var lastTime = 0;
+
+			function draw(a) {
+
+				//Create a new flower every 400ms
+				if (a >= lastTime + 1500) {
+					createFlower();
+					lastTime = a;
+				}
+
+				//Clear the scene
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				for (var i = 0, j = flowers.length; i < j; i++) {
+					flower = flowers[i];
+					var count = 6;
+					ctx.beginPath();
+
+					ctx.strokeStyle = flower.color;
+
+					//If flower is not visible, remove it
+					if (flower.size <= 0 && flower.born) {
+						flowers.splice(i, 1);
+						i--;
+						j--;
+					} else {
+
+						ctx.save();
+						ctx.translate(flower.position.x, flower.position.y);
+						ctx.rotate(a / (1000 / flower.speed + 200));
+
+						for (var angle = (Math.PI * 2) / count; angle < Math.PI * 2; angle += (Math.PI * 2) / count) {
+							var x = Math.cos(angle) * flower.size;
+							var y = Math.sin(angle) * flower.size;
+							ctx.moveTo(x + flower.size, y);
+							ctx.arc(x, y, flower.size, 0, Math.PI * 2);
+						}
+
+						if (!flower.born) {
+							flower.size += flower.scaleSpeed;
+						} else {
+							flower.size -= flower.scaleSpeed;
+						}
+
+						//Check if flower is growing or reducing
+						if (flower.size >= flower.maxSize) {
+							flower.born = true;
+						}
+
+						ctx.shadowColor = colors[1];
+						ctx.stroke();
+						ctx.closePath();
+						ctx.translate(-flower.position.x, -flower.position.y);
+						ctx.restore();
+
+					}
+
+				}
+
+			}
+
+			var render = function (a) {
+				requestAnimationFrame(render);
+				draw(a);
+			}
+
+			render();
+		</script>
+
 </body>
 
 </html>
