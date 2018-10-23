@@ -691,7 +691,7 @@
 				ctx = canvas.getContext('2d'),
 				ww = canvas.width = window.innerWidth,
 				wh = canvas.height = window.innerHeight,
-				colors = ["#D94A64", "#06ADBF", "#A0D94A", "#F2884B", "#F2C84B"],
+				colors = ["#D94A64", "#06ADBF", "#A0D94A", "#F2884B", "#F2C84B", "#FFEA00", "#FF0600", "#00F0FF", "#F000FF", "#60FF00", "#F600FF"],
 				flowers = [];
 
 			ctx.lineWidth = 3;
@@ -701,7 +701,7 @@
 				flowers.push({
 					speed: Math.random(),
 					scaleSpeed: Math.random() / 2 + .05,
-					color: colors[Math.floor(Math.random() * 5)],
+					color: colors[Math.floor(Math.random() * 11)],
 					position: {
 						x: Math.round(Math.random() * ww),
 						y: Math.round(Math.random() * wh)
@@ -718,7 +718,7 @@
 			function draw(a) {
 
 				//Create a new flower every 400ms
-				if (a >= lastTime + 1500) {
+				if (a >= lastTime + 1000) {
 					createFlower();
 					lastTime = a;
 				}
